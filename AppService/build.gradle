@@ -1,0 +1,45 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.6.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	def feignVersion = '8.18.0'
+	def ribbonVersion = '2.2.0'
+	def hystrixVersion = '1.5.4'
+	implementation([
+		'org.springframework.boot:spring-boot-starter-actuator',
+		'org.springframework.boot:spring-boot-starter-web'
+	])
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	runtime group: 'com.netflix.feign', name: 'feign-core', version: feignVersion
+	compile([
+		'com.netflix.feign:feign-gson:' + feignVersion,
+		'com.netflix.hystrix:hystrix-core:' + hystrixVersion,
+		'com.netflix.ribbon:ribbon:' + ribbonVersion,
+		'com.netflix.ribbon:ribbon-core:' + ribbonVersion,
+		'com.netflix.hystrix:hystrix-javanica:' + hystrixVersion,
+        'com.netflix.hystrix:hystrix-metrics-event-stream:' + hystrixVersion,
+        'com.netflix.ribbon:ribbon-loadbalancer:' + ribbonVersion,
+        'org.apache.httpcomponents:httpclient:4.5.1'
+	])
+}
