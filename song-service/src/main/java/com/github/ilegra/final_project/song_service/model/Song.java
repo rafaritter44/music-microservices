@@ -15,15 +15,10 @@ public class Song {
         this.singer = singer;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-
+    public String getName() { return name; }
+    public String getAlbum() { return album; }
+    public String getSinger() { return singer; }
+    
     @Override
     public String toString() {
         return "ID: " + id + "Name : " + name + " Album: " + album + " Singer: " + singer;
