@@ -2,6 +2,7 @@ package com.github.ilegra.final_project.song_service.command;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -11,26 +12,29 @@ import com.github.ilegra.final_project.song_service.model.Song;
 import com.netflix.hystrix.HystrixCommand;
 
 @Component
-public class AddSongCommand extends HystrixCommand<Void> {
+public class RemoveSongCommand extends HystrixCommand<Integer> {
 
-	private Song song;
+	private int id;
 	
-	public AddSongCommand(Setter config, Song song) {
+	public RemoveSongCommand(Setter config, int id) {
 		super(config);
-		this.song = song;
+		this.id = id;
 	}
 	
 	@Override
-	protected Void run() {
+	protected Integer run() {
 		try (Connection con = ConnectionFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement("INSERT INTO song(name, album, singer) VALUES(?,?,?)"
-						.replaceFirst("?", song.getName()).replaceFirst("?", song.getAlbum())
-						.replaceFirst("?", song.getSinger()))) {
-			stmt.executeUpdate();
+				PreparedStatement stmt = con.prepareStatement("DELETE FROM song WHERE id = ?"
+						.replaceFirst("?", id + ""))) {
+			return stmt.executeUpdate();
         } catch (Exception exception) {
             throw new DataBaseFailedConnection("Connection database failed");
         }
-		return null;
 	}
+	
+	@Override
+    protected Integer getFallback() {
+        return 0;
+    }
 	
 }
