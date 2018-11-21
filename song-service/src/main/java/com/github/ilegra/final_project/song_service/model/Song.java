@@ -1,8 +1,10 @@
 package com.github.ilegra.final_project.song_service.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Song {
 
+	@JsonIgnore
     private int id;
     private String name;
     private String album;
@@ -13,7 +15,7 @@ public class Song {
         this.name = name;
         this.album = album;
         this.singer = singer;
-    }
+    }    
 
     public String getName() { return name; }
     public String getAlbum() { return album; }

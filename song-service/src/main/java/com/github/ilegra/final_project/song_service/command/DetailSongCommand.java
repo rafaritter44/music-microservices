@@ -39,7 +39,6 @@ public class DetailSongCommand extends HystrixCommand<Optional<Song>> {
         return Optional.empty();
     }
 
-
     @Override
     protected Optional<Song> getFallback() {
         return Optional.empty();
