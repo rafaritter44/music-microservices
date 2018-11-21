@@ -12,12 +12,10 @@ public class Config {
 
 	public Setter getCommandConfig() {
 
-		Setter config = HystrixCommand.Setter
-				.withGroupKey(HystrixCommandGroupKey.Factory.asKey("playlist-service"));
-
-		HystrixCommandProperties.Setter commandProperties = HystrixCommandProperties.Setter();
-		commandProperties.withExecutionTimeoutInMilliseconds(5_000);
-		config.andCommandPropertiesDefaults(commandProperties);
+		HystrixCommandProperties.Setter commandProperties = HystrixCommandProperties.Setter()
+				.withExecutionTimeoutInMilliseconds(5_000);
+		Setter config = HystrixCommand.Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("song_service"))
+				.andCommandPropertiesDefaults(commandProperties);
 
 		return config;
 	}
