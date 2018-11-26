@@ -1,10 +1,13 @@
 package com.github.ilegra.final_project.playlist_service.dto;
 
+import java.util.List;
+
 public class PlaylistDTO {
 
     private int userId;
     private int id;
     private String name;
+	private List<String> songIdList;
 
     public PlaylistDTO(int userId, int id, String name) {
         this.userId = userId;
