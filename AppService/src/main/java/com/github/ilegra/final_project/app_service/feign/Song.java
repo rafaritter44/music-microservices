@@ -9,4 +9,7 @@ public interface Song {
 	
 	@RequestLine("POST /songs")
 	void post(SongImpl song);
+	
+	@RequestLine("DELETE /songs/{id}")
+	boolean delete(@Param("id") String id);
 }
