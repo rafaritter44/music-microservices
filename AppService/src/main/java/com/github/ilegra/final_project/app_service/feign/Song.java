@@ -6,4 +6,10 @@ import feign.RequestLine;
 public interface Song {
 	@RequestLine("GET /song-service/songs/{id}")
 	SongImpl get(@Param("id") String id);
+	
+	@RequestLine("POST /songs")
+	void post(SongImpl song);
+	
+	@RequestLine("DELETE /songs/{id}")
+	boolean delete(@Param("id") String id);
 }
