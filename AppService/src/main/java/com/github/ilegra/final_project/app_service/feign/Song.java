@@ -8,7 +8,7 @@ public interface Song {
 	SongImpl get(@Param("id") String id);
 	
 	@RequestLine("POST /songs")
-	void post(SongImpl song);
+	void post(SongPost song);
 	
 	@RequestLine("DELETE /songs/{id}")
 	boolean delete(@Param("id") String id);

@@ -7,7 +7,7 @@ import com.netflix.hystrix.HystrixCommand;
 import feign.Feign;
 import feign.gson.GsonEncoder;
 
-public class AddPlaylistCommand extends HystrixCommand<Void> {
+public class AddPlaylistCommand extends HystrixCommand<String> {
 
 	private String url;
 	private DetailedPlaylistWithName playlistWithName;
@@ -19,12 +19,17 @@ public class AddPlaylistCommand extends HystrixCommand<Void> {
 	}
 	
 	@Override
-	protected Void run() {
+	protected String run() {
 		DetailedPlaylist playlist = Feign.builder()
 				.encoder(new GsonEncoder())
 				.target(DetailedPlaylist.class, url);
 		playlist.post(playlistWithName);
-		return null;
+		return "Playlist added";
+	}
+	
+	@Override
+	protected String getFallback() {
+		return "Couldn't add playlist";
 	}
 	
 }

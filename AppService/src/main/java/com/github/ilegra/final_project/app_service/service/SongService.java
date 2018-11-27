@@ -7,13 +7,16 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.ilegra.final_project.app_service.command.AddSongCommand;
 import com.github.ilegra.final_project.app_service.command.Config;
 import com.github.ilegra.final_project.app_service.command.DetailedPlaylistCommand;
+import com.github.ilegra.final_project.app_service.command.RemoveSongCommand;
 import com.github.ilegra.final_project.app_service.command.SongDetailCommand;
 import com.github.ilegra.final_project.app_service.eureka.Discovery;
 import com.github.ilegra.final_project.app_service.exception.NotFoundException;
 import com.github.ilegra.final_project.app_service.feign.DetailedPlaylistImpl;
 import com.github.ilegra.final_project.app_service.feign.SongImpl;
+import com.github.ilegra.final_project.app_service.feign.SongPost;
 import com.github.ilegra.final_project.app_service.ribbon.LoadBalancer;
 import com.netflix.hystrix.HystrixCommand.Setter;
 
@@ -49,6 +52,20 @@ public class SongService {
 			}
 		}
 		return songs;
+	}
+	
+	public String addSong(SongPost song) {
+		setLoadBalancer(SONG_SERVICE);
+		String response = new AddSongCommand(config.getCommandConfig(SONG_SERVICE), loadBalancer.getURL(), song).execute();
+		return response.equals("Song added") ? response
+				: new AddSongCommand(config.getCommandConfig(SONG_SERVICE), loadBalancer.getURL(), song).execute();
+	}
+	
+	public boolean removeSong(String id) {
+		setLoadBalancer(SONG_SERVICE);
+		return new RemoveSongCommand(config.getCommandConfig(SONG_SERVICE), loadBalancer.getURL(), id).execute()
+				? true
+				: new RemoveSongCommand(config.getCommandConfig(SONG_SERVICE), loadBalancer.getURL(), id).execute();
 	}
 	
 	private void setLoadBalancer(String service) {
