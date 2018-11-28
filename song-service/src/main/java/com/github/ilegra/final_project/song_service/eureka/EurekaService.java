@@ -89,7 +89,7 @@ public class EurekaService{
     public static String getMachineIp() {
         NetworkInterface networkInterface;
         try {
-            networkInterface = NetworkInterface.getByName("enp2s0");
+            networkInterface = NetworkInterface.getByName("wlan3");
         } catch(Exception exception) {
             exception.printStackTrace();
             return "localhost";

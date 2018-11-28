@@ -10,7 +10,7 @@ public class DiscoverHostIp {
    public static String getMachineIp() {
        NetworkInterface networkInterface;
        try {
-           networkInterface = NetworkInterface.getByName("eno1");
+           networkInterface = NetworkInterface.getByName("wlan3");
        } catch(Exception exception) {
            exception.printStackTrace();
            return "localhost";

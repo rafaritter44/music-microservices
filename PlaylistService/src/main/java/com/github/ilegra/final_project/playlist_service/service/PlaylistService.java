@@ -11,6 +11,7 @@ import com.github.ilegra.final_project.playlist_service.command.Config;
 import com.github.ilegra.final_project.playlist_service.command.DeletePlaylistCommand;
 import com.github.ilegra.final_project.playlist_service.command.RetrievePlaylistCommand;
 import com.github.ilegra.final_project.playlist_service.command.RetrieveUserPlaylistCommand;
+import com.github.ilegra.final_project.playlist_service.command.UpdatePlaylistCommand;
 import com.github.ilegra.final_project.playlist_service.dto.DetailedPlaylistDTO;
 import com.github.ilegra.final_project.playlist_service.dto.PlaylistDTO;
 import com.github.ilegra.final_project.playlist_service.dto.RequestPlaylistDTO;
@@ -38,12 +39,16 @@ public class PlaylistService {
 		return playlist.get();
 	}
 
-	public boolean DeletePlaylist(int playlistId) {
+	public boolean deletePlaylist(int playlistId) {
 		return new DeletePlaylistCommand(playlistId, config.getCommandConfig()).execute();
 	}
 
 	public void addPlaylist(RequestPlaylistDTO playlist) {
 		new AddPlaylistCommand(config.getCommandConfig(), playlist);
+	}
+	
+	public void updatePlaylist(RequestPlaylistDTO playlist) {
+	    new UpdatePlaylistCommand(config.getCommandConfig(), playlist);
 	}
 
 }
