@@ -3,13 +3,11 @@ package com.github.ilegra.final_project.playlist_service.command;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import org.springframework.stereotype.Component;
-
 import com.github.ilegra.final_project.playlist_service.db.ConnectionFactory;
 import com.github.ilegra.final_project.playlist_service.dto.RequestPlaylistDTO;
 import com.netflix.hystrix.HystrixCommand;
 
-@Component
+
 public class UpdatePlaylistCommand extends HystrixCommand<Void> {
 
     private RequestPlaylistDTO playlist;
