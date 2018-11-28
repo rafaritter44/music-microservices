@@ -10,7 +10,7 @@ import com.github.ilegra.final_project.song_service.exception.DataBaseFailedConn
 import com.github.ilegra.final_project.song_service.model.Song;
 import com.netflix.hystrix.HystrixCommand;
 
-@Component
+
 public class AddSongCommand extends HystrixCommand<Void> {
 
 	private Song song;
@@ -23,7 +23,7 @@ public class AddSongCommand extends HystrixCommand<Void> {
 	@Override
 	protected Void run() {
 		try (Connection con = ConnectionFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement("INSERT INTO song(name, album, singer) VALUES(?,?,?)"
+				PreparedStatement stmt = con.prepareStatement("INSERT INTO song(song_name, album, singer) VALUES(?,?,?)"
 						.replaceFirst("?", song.getName()).replaceFirst("?", song.getAlbum())
 						.replaceFirst("?", song.getSinger()))) {
 			stmt.executeUpdate();

@@ -24,7 +24,7 @@ public class EurekaConfiguration {
 		HttpComponentsClientHttpRequestFactory clientHttpRequestFactory = new HttpComponentsClientHttpRequestFactory(
 	            HttpClientBuilder.create().build());
 		REST_TEMPLATE = new RestTemplate(clientHttpRequestFactory);
-		URL = "http://10.99.1.86:8080/eureka/v2/apps/";
+		URL = "http://127.0.0.1:8080/eureka-server-1.1.37/v2/apps/";
 	}
 	
 	public static EurekaConfiguration getInstance() { return ServiceHolder.INSTANCE; }
@@ -57,7 +57,7 @@ public class EurekaConfiguration {
 		return response.getStatusCodeValue();
 	}
 
-
+ 
 	private String postJsonBody(String appID) {
 		return "{\n" + 
 				"    \"instance\": {\n" + 

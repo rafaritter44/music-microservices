@@ -21,7 +21,7 @@ public class Discovery {
 	
 	private final ApplicationContext CONTEXT = ContextSingleton.getInstance();
 	private final RestTemplate REST_TEMPLATE = CONTEXT.getBean(RestTemplate.class);
-	private final String URL = "http://" + GetHostIp.getMachineIp() + ":8080/eureka/v2/apps/";
+	private final String URL = "http://" + GetHostIp.getMachineIp() + ":8080/eureka-server-1.1.37/v2/apps/";
 	private final String IP_KEY = "\"ipAddr\":\"";
 	private final String PORT_KEY = "\"port\":";
 	
@@ -37,7 +37,7 @@ public class Discovery {
 		HttpEntity<String> entity = new HttpEntity<>(jsonHeaders());
 	    ResponseEntity<String> response =
 	    		REST_TEMPLATE.exchange(URL + appID, HttpMethod.GET, entity, String.class);
-		String body = response.getBody();
+		String body = response.getBody().replaceAll("\"@enabled\":\"true\",", "");
 		while(body.contains(IP_KEY) && body.contains(PORT_KEY)) {
 			ipsAndPorts.add(getFirstIP(body) + ":" + getFirstPort(body));
 			body = body.substring(body.indexOf(PORT_KEY) + PORT_KEY.length());
@@ -52,7 +52,7 @@ public class Discovery {
 	
 	private String getFirstPort(String body) {
 		String splittedResponse = body.split(PORT_KEY)[1];
-		return splittedResponse.substring("{\"$\":".length(), splittedResponse.indexOf(","));
+		return splittedResponse.substring("{\"$\":".length(), splittedResponse.indexOf(",")).replaceAll("\'", "").replaceAll("}", "").substring(1, 5);
 	}
 	
 }

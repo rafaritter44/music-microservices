@@ -18,7 +18,7 @@ public class EurekaService{
 	}
 
 	private final RestTemplate REST_TEMPLATE;
-	private final int PORT = 8081;
+	private final int PORT = 8083;
 	private final String STATUS = "UP";
 	private final String URL;
 
@@ -26,7 +26,7 @@ public class EurekaService{
 		HttpComponentsClientHttpRequestFactory clientHttpRequestFactory = new HttpComponentsClientHttpRequestFactory(
 				HttpClientBuilder.create().build());
 		REST_TEMPLATE = new RestTemplate(clientHttpRequestFactory);
-		URL = "http://10.99.1.3:8080/eureka/v2/apps/";
+		URL = "http://127.0.0.1:8080/eureka-server-1.1.37/v2/apps/";
 	}
 
 	public static EurekaService getInstance() { return ServiceHolder.INSTANCE; }

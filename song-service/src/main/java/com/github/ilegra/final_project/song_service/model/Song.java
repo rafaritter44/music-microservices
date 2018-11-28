@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Song {
 
-	@JsonIgnore
+    @JsonIgnore
     private int id;
     private String name;
     private String album;
@@ -15,12 +15,23 @@ public class Song {
         this.name = name;
         this.album = album;
         this.singer = singer;
-    }    
+    }
 
-    public String getName() { return name; }
-    public String getAlbum() { return album; }
-    public String getSinger() { return singer; }
-    
+    public Song() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public String getSinger() {
+        return singer;
+    }
+
     @Override
     public String toString() {
         return "ID: " + id + "Name : " + name + " Album: " + album + " Singer: " + singer;

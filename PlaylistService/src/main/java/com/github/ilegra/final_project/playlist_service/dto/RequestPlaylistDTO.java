@@ -14,6 +14,10 @@ public class RequestPlaylistDTO {
 	        this.name = name;
 	    }
 	 
+	 public RequestPlaylistDTO() {
+	     
+	 }
+	 
 	public int getUser_id() {
 		return userId;
 	}

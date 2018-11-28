@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 public class ConnectionFactory {
     private static final String URL = "jdbc:mysql://127.0.0.1:3306/song?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static final String USUARIO = "root";
-    private static final String SENHA = "test";
+    private static final String SENHA = "senha";
 
     public static Connection getConnection() {
         System.out.println("Conectando ao banco...");

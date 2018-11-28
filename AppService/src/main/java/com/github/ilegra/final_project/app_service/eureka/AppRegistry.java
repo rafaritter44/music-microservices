@@ -22,7 +22,7 @@ public class AppRegistry {
 	
 	private final ApplicationContext CONTEXT = ContextSingleton.getInstance();
 	private final RestTemplate REST_TEMPLATE = CONTEXT.getBean(RestTemplate.class);
-	private final String URL = "http://" + GetHostIp.getMachineIp() + ":8080/eureka/v2/apps/";
+	private final String URL = "http://" + GetHostIp.getMachineIp() + ":8080/eureka-server-1.1.37/v2/apps/";
 	private final String APP_NAME = "app-service";
 	
 	private HttpHeaders jsonHeaders() {

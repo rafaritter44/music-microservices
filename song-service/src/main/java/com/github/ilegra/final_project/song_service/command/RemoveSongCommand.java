@@ -11,7 +11,6 @@ import com.github.ilegra.final_project.song_service.exception.DataBaseFailedConn
 import com.github.ilegra.final_project.song_service.model.Song;
 import com.netflix.hystrix.HystrixCommand;
 
-@Component
 public class RemoveSongCommand extends HystrixCommand<Integer> {
 
 	private int id;
