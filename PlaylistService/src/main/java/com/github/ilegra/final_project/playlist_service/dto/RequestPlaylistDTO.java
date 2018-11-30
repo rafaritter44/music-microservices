@@ -8,6 +8,7 @@ public class RequestPlaylistDTO {
     @JsonProperty("userId")
     private int userId;
 	private int id;
+	@JsonProperty("name")
 	private String name;
 	@JsonProperty("songIdList")
 	private List<String> songIdList;

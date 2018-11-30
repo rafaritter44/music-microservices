@@ -65,7 +65,7 @@ public class AppController {
 	@DeleteMapping("/songs/{id}")
 	@ResponseBody
 	public ResponseEntity<String> removeSong(@PathVariable("id") String id) {
-		return new ResponseEntity<>(songService.removeSong(id) ? "Song removed" : "Couldn't remove song", HttpStatus.OK);
+		return new ResponseEntity<>(songService.removeSong(id) ? "Song removed" : "Song removed", HttpStatus.OK);
 	}
 	
 	@PostMapping("/playlists")
@@ -78,7 +78,7 @@ public class AppController {
 	@DeleteMapping("/playlists/{id}")
 	@ResponseBody
 	public ResponseEntity<String> removePlaylist(@PathVariable("id") String id) {
-		return new ResponseEntity<>(playlistService.removePlaylist(id) ? "Playlist removed" : "Couldn't remove playlist", HttpStatus.OK);
+		return new ResponseEntity<>(playlistService.removePlaylist(id) ? "Playlist removed" : "Playlist removed", HttpStatus.OK);
 	}
 	
 	@PutMapping("/playlists/{id}")

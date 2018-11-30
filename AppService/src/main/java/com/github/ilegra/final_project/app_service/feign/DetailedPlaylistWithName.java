@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DetailedPlaylistWithName {
 
+    @JsonProperty("userId")
+    private int userId;
     private String name;
     @JsonProperty("songIdList")
     private List<String> songIdList;

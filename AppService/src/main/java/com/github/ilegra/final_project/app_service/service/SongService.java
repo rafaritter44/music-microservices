@@ -63,9 +63,7 @@ public class SongService {
 	
 	public boolean removeSong(String id) {
 		setLoadBalancer(SONG_SERVICE);
-		return new RemoveSongCommand(config.getCommandConfig(SONG_SERVICE), loadBalancer.getURL(), id).execute()
-				? true
-				: new RemoveSongCommand(config.getCommandConfig(SONG_SERVICE), loadBalancer.getURL(), id).execute();
+		return new RemoveSongCommand(config.getCommandConfig(SONG_SERVICE), loadBalancer.getURL(), id).execute();
 	}
 	
 	private void setLoadBalancer(String service) {
