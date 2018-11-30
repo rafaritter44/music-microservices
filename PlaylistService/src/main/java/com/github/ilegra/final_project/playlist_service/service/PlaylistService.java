@@ -44,11 +44,11 @@ public class PlaylistService {
 	}
 
 	public void addPlaylist(RequestPlaylistDTO playlist) {
-		new AddPlaylistCommand(config.getCommandConfig(), playlist);
+		new AddPlaylistCommand(config.getCommandConfig(), playlist).execute();
 	}
 	
 	public void updatePlaylist(RequestPlaylistDTO playlist) {
-	    new UpdatePlaylistCommand(config.getCommandConfig(), playlist);
+	    new UpdatePlaylistCommand(config.getCommandConfig(), playlist).execute();
 	}
 
 }

@@ -13,7 +13,7 @@ public class Config {
 	public Setter getCommandConfig() {
 
 		HystrixCommandProperties.Setter commandProperties = HystrixCommandProperties.Setter()
-				.withExecutionTimeoutInMilliseconds(5_000);
+				.withExecutionTimeoutInMilliseconds(10_000);
 		Setter config = HystrixCommand.Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("song_service"))
 				.andCommandPropertiesDefaults(commandProperties);
 

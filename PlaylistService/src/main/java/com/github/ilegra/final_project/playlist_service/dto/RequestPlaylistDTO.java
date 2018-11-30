@@ -2,10 +2,14 @@ package com.github.ilegra.final_project.playlist_service.dto;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class RequestPlaylistDTO {
-	private int userId;
+    @JsonProperty("userId")
+    private int userId;
 	private int id;
 	private String name;
+	@JsonProperty("songIdList")
 	private List<String> songIdList;
 
 	 public RequestPlaylistDTO(int userId, int id, String name) {

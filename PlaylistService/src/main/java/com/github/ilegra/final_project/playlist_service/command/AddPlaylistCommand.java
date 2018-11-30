@@ -2,7 +2,10 @@ package com.github.ilegra.final_project.playlist_service.command;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
+
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.ilegra.final_project.playlist_service.db.ConnectionFactory;
 import com.github.ilegra.final_project.playlist_service.dto.RequestPlaylistDTO;
@@ -16,21 +19,24 @@ public class AddPlaylistCommand extends HystrixCommand<Void> {
         super(config);
         this.playlist = playlist;
     }
-
+    @Transactional
     @Override
     protected Void run() throws Exception {
         try (Connection con = ConnectionFactory.getConnection();
-                PreparedStatement stmt = con.prepareStatement(
-                        "INSERT INTO Playlists(user_id, name) VALUES(?,?)".replaceFirst("?",
-                                Integer.toString(playlist.getUser_id()).replaceFirst("?", playlist.getName())),
+                PreparedStatement stmt = con.prepareStatement("INSERT INTO Playlists(user_id, name) VALUES(?,?)",
                         Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, Integer.toString(playlist.getUser_id()));
+            stmt.setString(2, playlist.getName());
             stmt.executeUpdate();
-            int playlistId = stmt.getGeneratedKeys().getInt(1);
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+            int playlistId = rs.getInt(1);
             for (String id : playlist.getSongIdLIst()) {
                 PreparedStatement songStatment = con
-                        .prepareStatement("INSERT INTO Playlists_songs(song_id, playlist_id), VALUES(?,?)"
-                                .replaceFirst("?", id).replaceFirst("?", Integer.toString(playlistId)));
-                songStatment.executeQuery();
+                        .prepareStatement("INSERT INTO playlists_songs(song_id, playlist_id) VALUES(?,?)");
+                songStatment.setString(1, id);
+                songStatment.setString(2, Integer.toString(playlistId));
+                songStatment.executeUpdate();
             }
         } catch (Exception exception) {
             throw new Exception("Connection database failed");
