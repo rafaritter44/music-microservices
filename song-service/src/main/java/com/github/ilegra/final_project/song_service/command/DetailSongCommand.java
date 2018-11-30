@@ -27,7 +27,7 @@ public class DetailSongCommand extends HystrixCommand<Optional<Song>> {
 
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String name = rs.getString("name");
+                String name = rs.getString("song_name");
                 String singer = rs.getString("singer");
                 String album = rs.getString("album");
 

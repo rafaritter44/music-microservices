@@ -3,8 +3,10 @@ package com.github.ilegra.final_project.app_service.feign;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DetailedPlaylistImpl {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+public class DetailedPlaylistImpl {
+    @JsonProperty("songIdList")
 	private List<String> songIdList;
 
 	public DetailedPlaylistImpl(List<String> songIdList) {

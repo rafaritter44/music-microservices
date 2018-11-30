@@ -13,27 +13,26 @@ import com.netflix.hystrix.HystrixCommand;
 
 public class RemoveSongCommand extends HystrixCommand<Integer> {
 
-	private int id;
-	
-	public RemoveSongCommand(Setter config, int id) {
-		super(config);
-		this.id = id;
-	}
-	
-	@Override
-	protected Integer run() {
-		try (Connection con = ConnectionFactory.getConnection();
-				PreparedStatement stmt = con.prepareStatement("DELETE FROM song WHERE id = ?"
-						.replaceFirst("?", id + ""))) {
-			return stmt.executeUpdate();
+    private int id;
+
+    public RemoveSongCommand(Setter config, int id) {
+        super(config);
+        this.id = id;
+    }
+
+    @Override
+    protected Integer run() {
+        try (Connection con = ConnectionFactory.getConnection();
+                PreparedStatement stmt = con.prepareStatement("DELETE FROM song WHERE id = " + id)) {
+            return stmt.executeUpdate();
         } catch (Exception exception) {
             throw new DataBaseFailedConnection("Connection database failed");
         }
-	}
-	
-	@Override
+    }
+
+    @Override
     protected Integer getFallback() {
         return 0;
     }
-	
+
 }
